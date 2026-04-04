@@ -115,7 +115,7 @@ def khu_ma_tran_ve_bac_thang(ma_tran_chuan_hoa, b_chuan_hoa):
     so_dong_chuan_hoa = len(ma_tran_chuan_hoa)      # Số hàng
     so_cot_chuan_hoa = len(ma_tran_chuan_hoa[0])   # Số cột
 
-    cnt = 0         # Đếm số lần hoán đổi hàng
+    so_lan_doi_hang = 0         # Đếm số lần hoán đổi hàng
     pivot_rows = [] # Lưu chỉ số hàng chứa pivot
     pivot_cols = [] # Lưu chỉ số cột chứa pivot
     k = 0           # Chỉ số hàng hiện tại (từ 0 trở đi)
@@ -141,7 +141,7 @@ def khu_ma_tran_ve_bac_thang(ma_tran_chuan_hoa, b_chuan_hoa):
             ma_tran_chuan_hoa[k], ma_tran_chuan_hoa[max_row] = ma_tran_chuan_hoa[max_row], ma_tran_chuan_hoa[k]
             # Hoán hàng của vector b tương ứng
             b_chuan_hoa[k], b_chuan_hoa[max_row] = b_chuan_hoa[max_row], b_chuan_hoa[k]
-            cnt += 1  # Tăng bộ đếm hoán hàng
+            so_lan_doi_hang += 1  # Tăng bộ đếm hoán hàng
 
         # BƯỚC 3: sắp xếp pivot
         pivot_rows.append(k)
@@ -163,7 +163,7 @@ def khu_ma_tran_ve_bac_thang(ma_tran_chuan_hoa, b_chuan_hoa):
 
         k += 1  # Chuyển sang hàng tiếp theo
 
-    return ma_tran_chuan_hoa, b_chuan_hoa, cnt, pivot_rows, pivot_cols
+    return ma_tran_chuan_hoa, b_chuan_hoa, so_lan_doi_hang, pivot_rows, pivot_cols
 
 
 # Xác định loại nghiệm (vô nghiệm / vô số / duy nhất) và tính nghiệm nếu có

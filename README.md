@@ -6,7 +6,7 @@ Tài liệu này giải thích nhanh cách dùng các hàm trong `gaussian.py`, 
 
 Hàm trả về một tuple gồm 3 phần tử:
 
-- phần tử `[0]`: `ma_trix_sau_khu` (ma trận dạng bậc thang, kiểu `Fraction`)
+- phần tử `[0]`: `ma_tran_sau_khu` (ma trận dạng bậc thang, kiểu `Fraction`)
 - phần tử `[1]`: `nghiem_he`
 - phần tử `[2]`: `so_lan_hoan_doi_hang` (`int`)
 
