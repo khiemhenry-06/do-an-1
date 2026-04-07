@@ -1,6 +1,4 @@
-from fractions import Fraction
 from gaussian import *
-
 
 # ===== TÍNH ĐỊNH THỨC BẰNG KHỬ GAUSS =====
 def determinant(A):
@@ -14,23 +12,23 @@ def determinant(A):
     if so_dong != so_cot:
         raise ValueError("A phải là ma trận vuông.")
 
-    ma_tran_chuan_hoa = [[to_fraction(x) for x in row] for row in A]
-    b_chuan_hoa = [Fraction(0, 1)] * so_dong
+    ma_tran_chuan_hoa = [[to_float(x) for x in row] for row in A]
+    b_chuan_hoa = [0.0] * so_dong
 
-    ma_tran_sau_khu, b_sau_khu, so_lan_doi_hang, pivot_rows, pivot_cols = khu_ma_tran_ve_bac_thang(ma_tran_chuan_hoa, b_chuan_hoa)
+    ma_tran_sau_khu, b_sau_khu, so_lan_doi_hang, pivot_rows, pivot_cols = khu_ma_tran_ve_bac_thang(ma_tran_chuan_hoa, b_chuan_hoa, eps=EPS)
 
     # Kiểm tra nếu có hàng bằng 0 thì det = 0
     for i in range(so_dong):
-        if all(ma_tran_sau_khu[i][j] == 0 for j in range(so_cot)):
-            return Fraction(0, 1)
+        if all(abs(ma_tran_sau_khu[i][j]) <= EPS for j in range(so_cot)):
+            return 0.0
 
     # Tính tích các phần tử trên đường chéo
-    det_product = Fraction(1, 1)
+    det_product = 1.0
     for i in range(so_cot):
         det_product *= ma_tran_sau_khu[i][i]
 
     # Định thức = (-1)^(số lần hoán hàng) × tích các phần tử trên đường chéo
-    det = det_product * (Fraction(-1, 1) ** so_lan_doi_hang)
+    det = det_product * ((-1.0) ** so_lan_doi_hang)
 
     return det
 

@@ -1,6 +1,4 @@
-from fractions import Fraction
 from gaussian import *
-
 
 def rank_and_basis(A):
 	if not A:
@@ -11,12 +9,12 @@ def rank_and_basis(A):
 	if any(len(row) != so_cot for row in A):
 		raise ValueError("A phải là ma trận chữ nhật.")
 
-	A_chuan_hoa = [[to_fraction(x) for x in row] for row in A]
-	b_chuan_hoa = [Fraction(0, 1)] * so_dong
+	A_chuan_hoa = [[to_float(x) for x in row] for row in A]
+	b_chuan_hoa = [0.0] * so_dong
 
 	# Sao chép ma trận A để khử mà không làm thay đổi A gốc, vì cần A gốc để lấy cơ sở không gian cột
 	ma_tran_sao = [row[:] for row in A_chuan_hoa]    
-	ket_qua_khu = khu_ma_tran_ve_bac_thang(ma_tran_sao, b_chuan_hoa)
+	ket_qua_khu = khu_ma_tran_ve_bac_thang(ma_tran_sao, b_chuan_hoa, eps=EPS)
 	R = ket_qua_khu[0]          # Ma trận bậc thang
 	pivot_rows = ket_qua_khu[3] # Các hàng pivot
 	pivot_cols = ket_qua_khu[4] # Các cột pivot
@@ -31,21 +29,21 @@ def rank_and_basis(A):
 	# Cơ sở không gian dòng: các hàng khác 0 của ma trận bậc thang
 	khong_gian_dong = []
 	for row in range(so_dong):
-		if any(R[row][col] != 0 for col in range(so_cot)):
+		if any(abs(R[row][col]) > EPS for col in range(so_cot)):
 			khong_gian_dong.append(R[row][:])
 
 	# Cơ sở không gian nghiệm: dựng theo biến tự do
 	cot_tu_do_s = [colPivot for colPivot in range(so_cot) if colPivot not in pivot_cols]
 	khong_gian_nghiem= []
 	for cot_tu_do in cot_tu_do_s:
-		vec = [Fraction(0, 1)] * so_cot	
-		vec[cot_tu_do] = Fraction(1, 1)
+		vec = [0.0] * so_cot	
+		vec[cot_tu_do] = 1.0
 
 		# Giải ngược cho các biến pivot
 		for idx in range(len(pivot_cols) - 1, -1, -1):
 			rowPivot = pivot_rows[idx]
 			colPivot = pivot_cols[idx]
-			tong = Fraction(0, 1)
+			tong = 0.0
 			for j in range(colPivot + 1, so_cot):
 				tong += R[rowPivot][j] * vec[j]
 			vec[colPivot] = -tong / R[rowPivot][colPivot]

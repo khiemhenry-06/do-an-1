@@ -44,7 +44,12 @@
 \newpage
 
 \section{Giới Thiệu Dự Án}
+<<<<<<< HEAD
 
+=======
+Hỗ trợ: github copilot để hỗ trợ viết báo cáo và kiểm tra lỗi cú pháp, giải 
+thích thuật toán.\\
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 Dự án này cài đặt các thuật toán cơ bản của đại số tuyến tính bằng Python, bao gồm:
 \begin{itemize}
     \item Khử Gauss (Gaussian Elimination)
@@ -54,8 +59,13 @@ Dự án này cài đặt các thuật toán cơ bản của đại số tuyến
     \item Các hàm hỗ trợ và định dạng hiển thị
 \end{itemize}
 
+<<<<<<< HEAD
 Tất cả các tính toán đều sử dụng lớp \texttt{Fraction} từ thư viện chuẩn \texttt{fractions} để đảm bảo độ chính xác cao, tránh sai số do làm tròn số thực trong các phép toán.
 
+=======
+Tất cả tính toán được thực hiện bằng cách sử dụng số thực dấu phẩy động (\texttt{float}) kết hợp ngưỡng sai số \texttt{EPS} để so sánh với 0. Cách này giúp tăng tốc đáng kể khi kích thước ma trận lớn, đồng thời vẫn đảm bảo độ ổn định số học ở mức phù hợp cho bài toán.
+ 
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 \section{Tổng Quan Cấu Trúc Dự Án}
 
 \subsection{Danh Sách File}
@@ -66,6 +76,14 @@ Tất cả các tính toán đều sử dụng lớp \texttt{Fraction} từ thư
     \item \texttt{rank\_basis.py} - Tính hạng và cơ sở không gian
     \item \texttt{part1\_demo.ipynb} - Notebook minh họa với các bài kiểm thử
     \item \texttt{README.md} - Hướng dẫn sử dụng
+<<<<<<< HEAD
+=======
+    \item \texttt{report} 
+        \begin{itemize}
+            \item \texttt{report.tex} - Báo cáo chi tiết giải thích thuật toán và kết quả
+            \item \texttt{report.pdf} - Phiên bản PDF của báo cáo
+        \end{itemize}
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 \end{itemize}
 
 \section{Thuật Toán Khử Gauss (gaussian.py)}
@@ -76,6 +94,7 @@ Tệp \texttt{gaussian.py} chứa các hàm cốt lõi cho thuật toán khử G
 
 \subsubsection{Các Hàm Hỗ Trợ}
 
+<<<<<<< HEAD
 \paragraph{to\_fraction(value)}
 Chuyển đổi giá trị (int, float, hoặc Fraction) thành kiểu \texttt{Fraction}:
 \begin{lstlisting}
@@ -87,13 +106,28 @@ def to_fraction(value):
 
 \paragraph{dinh\_dang\_hien\_thi(value)}
 Định dạng \texttt{Fraction} để hiển thị (ví dụ: "$\frac{3}{2}$" hoặc "3" nếu mẫu = 1)
+=======
+\paragraph{to\_float(value)}
+Chuyển đổi giá trị đầu vào về kiểu \texttt{float}:
+\begin{lstlisting}
+def to_float(value):
+    return float(value)
+\end{lstlisting}
+
+\paragraph{dinh\_dang\_hien\_thi(value)}
+Định dạng số thực để hiển thị gọn (làm sạch các giá trị rất nhỏ về 0 và hiển thị số nguyên khi phù hợp).
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 
 \paragraph{in\_ma\_tran\_dep(ma\_tran)}
 In ma trận dưới dạng cấu trúc bảng gọn gàng, căn lề phải
 
 \subsubsection{Khử Ma Trận về Bậc Thang}
 
+<<<<<<< HEAD
 Hàm \texttt{khu\_ma\_tran\_ve\_bac\_thang(ma\_tran\_chuan\_hoa, b\_chuan\_hoa)} thực hiện:
+=======
+Hàm \texttt{khu\_ma\_tran\_ve\_bac\_thang(ma\_tran\_chuan\_hoa, b\_chuan\_hoa, eps)} thực hiện:
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 
 \begin{enumerate}
     \item Duyệt qua từng cột từ trái sang phải
@@ -107,6 +141,11 @@ Hàm \texttt{khu\_ma\_tran\_ve\_bac\_thang(ma\_tran\_chuan\_hoa, b\_chuan\_hoa)}
     %
 \end{enumerate}
 
+<<<<<<< HEAD
+=======
+Trong quá trình khử, các so sánh với 0 được thực hiện theo ngưỡng \texttt{EPS} thay vì so sánh bằng tuyệt đối để giảm ảnh hưởng sai số dấu phẩy động.
+
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 Trả về:
 \begin{itemize}
     \item \texttt{ma\_tran\_sau\_khu}: Ma trận dạng bậc thang
@@ -148,7 +187,11 @@ if nghiem_he is None:
 elif len(nghiem_he) > 0 and isinstance(nghiem_he[0], str):
     print("Vo so nghiem:", nghiem_he)
 else:
+<<<<<<< HEAD
     print("Nghiem duy nhat:", [float(v) for v in nghiem_he])
+=======
+    print("Nghiem duy nhat:", nghiem_he)
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 \end{lstlisting}
 
 \paragraph{print\_gaussian\_eliminate(A, b)}
@@ -183,7 +226,11 @@ trong đó:
 
 \begin{lstlisting}
 A = [[2, 3], [1, 5]]
+<<<<<<< HEAD
 det = determinant(A)  # Tra ve Fraction
+=======
+det = determinant(A)  # Tra ve float
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 print(f"Dinh thuc: {det}")
 
 # Hoac in theo dinh dang dep
@@ -223,7 +270,11 @@ Ma trận nghịch đảo được tính từ ma trận mở rộng $[A \mid I]$
 
 \begin{lstlisting}
 A = [[2, 3], [1, 5]]
+<<<<<<< HEAD
 A_inv = inverse(A)  # Tra ve danh sach cac Fraction
+=======
+A_inv = inverse(A)  # Tra ve danh sach cac float
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 
 if A_inv is not None:
     print_inverse(A)  # In A va A^(-1)
@@ -332,16 +383,28 @@ Notebook \texttt{part1\_demo.ipynb} cung cấp các bài kiểm thử toàn di�
 \subsubsection{Test Rank and Basis}
 
 \begin{itemize}
+<<<<<<< HEAD
     \item Ma trận vuông khả nghịch (full rank)
     \item Ma trận phụ thuộc tuyến tính (rank thiếu)
     \item Ma trận chữ nhật (underdetermined)
+=======
+    \item Ma trận vuông khả nghịch (rank = n)
+    \item Ma trận phụ thuộc tuyến tính (rank < n)
+    \item Ma trận chữ nhật 
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
     \item Ma trận rank = 1
     \item Ma trận zero (rank = 0)
 \end{itemize}
 
+<<<<<<< HEAD
 \subsection{Kiểm Chứng bằng NumPy}
 
 Notebook cũng thực hiện kiểm chứng so sánh kết quả với các hàm tính toán có sẵn:
+=======
+\subsection{Kiểm Chứng bằng NumPy và SymPy}
+
+Notebook cũng thực hiện kiểm chứng so sánh kết quả với các hàm tính toán có sẵn. Ngoài nghiệm, định thức và nghịch đảo, phần cơ sở không gian cột, dòng và nghiệm được kiểm chứng bằng cách so sánh hai không gian con có cùng tập sinh:
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 
 \begin{lstlisting}
 # Kiem chung nghiem
@@ -358,10 +421,60 @@ flag2 = np.isclose(my_det, np_det)
 I_calc = A_np @ my_inv_np
 flag3 = np.allclose(I_calc, np.eye(n))
 
+<<<<<<< HEAD
 # Kiem chung hang
 my_rank = rank_and_basis(A)[0]
 np_rank = int(np.linalg.matrix_rank(np.array(A)))
 flag4 = my_rank == np_rank
+=======
+# Kiem chung co so khong gian cot/dong/nghiem
+import sympy as sp
+
+def ma_tran_co_so_cot(co_so, so_chieu):
+    if not co_so:
+        return np.zeros((so_chieu, 0), dtype=float)
+    return np.array(co_so, dtype=float).T
+
+def nam_trong_tap_sinh(v, M, tol=1e-8):
+    if M.shape[1] == 0:
+        return np.linalg.norm(v) <= tol
+    he_so, *_ = np.linalg.lstsq(M, v, rcond=None)
+    return np.linalg.norm(M @ he_so - v) <= tol
+
+def cung_khong_gian_con(co_so_1, co_so_2, so_chieu, tol=1e-8):
+    M1 = ma_tran_co_so_cot(co_so_1, so_chieu)
+    M2 = ma_tran_co_so_cot(co_so_2, so_chieu)
+
+    hang_1 = np.linalg.matrix_rank(M1, tol)
+    hang_2 = np.linalg.matrix_rank(M2, tol)
+    hang_ghep = np.linalg.matrix_rank(np.hstack([M1, M2]), tol)
+    if not (hang_1 == hang_2 == hang_ghep):
+        return False
+
+    for j in range(M1.shape[1]):
+        if not nam_trong_tap_sinh(M1[:, j], M2, tol):
+            return False
+    for j in range(M2.shape[1]):
+        if not nam_trong_tap_sinh(M2[:, j], M1, tol):
+            return False
+    return True
+
+my_rank, my_col_space, my_row_space, my_null_space = rank_and_basis(A_basis)
+sp_col_space = [list(map(float, v)) for v in sp.Matrix(A_basis).columnspace()]
+sp_row_space = [list(map(float, list(v))) for v in sp.Matrix(A_basis).rowspace()]
+sp_null_space = [list(map(float, v)) for v in sp.Matrix(A_basis).nullspace()]
+
+so_hang = len(A_basis)
+so_cot = len(A_basis[0])
+my_row_as_cols = [row[:] for row in my_row_space]
+sp_row_as_cols = [row[:] for row in sp_row_space]
+
+flag4 = (
+    cung_khong_gian_con(my_col_space, sp_col_space, so_chieu=so_hang)
+    and cung_khong_gian_con(my_row_as_cols, sp_row_as_cols, so_chieu=so_cot)
+    and cung_khong_gian_con(my_null_space, sp_null_space, so_chieu=so_cot)
+)
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 \end{lstlisting}
 
 \newpage
@@ -373,7 +486,11 @@ flag4 = my_rank == np_rank
 Hàm \texttt{gaussian\_eliminate(A, b)} trả về tuple gồm 3 phần tử:
 
 \begin{enumerate}
+<<<<<<< HEAD
     \item \texttt{[0]}: Ma trận dạng bậc thang (kiểu \texttt{Fraction})
+=======
+    \item \texttt{[0]}: Ma trận dạng bậc thang (kiểu \texttt{float})
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
     \item \texttt{[1]}: Nghiệm hệ
     \item \texttt{[2]}: Số lần hoán đổi hàng (int)
 \end{enumerate}
@@ -382,7 +499,11 @@ Hàm \texttt{gaussian\_eliminate(A, b)} trả về tuple gồm 3 phần tử:
 
 \begin{itemize}
     \item \texttt{None}: Hệ vô nghiệm
+<<<<<<< HEAD
     \item \texttt{list[Fraction]}: Hệ có nghiệm duy nhất
+=======
+    \item \texttt{list[float]}: Hệ có nghiệm duy nhất
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
     \item \texttt{list[str]}: Hệ có vô số nghiệm (dạng tham số)
 \end{itemize}
 
@@ -397,6 +518,7 @@ else:
     print("Nghiem duy nhat:", nghiem_he)
 \end{lstlisting}
 
+<<<<<<< HEAD
 \subsection{Chuyển Đổi Kiểu Dữ Liệu}
 
 \begin{itemize}
@@ -413,6 +535,16 @@ Ví dụ:
 x_float = [float(v) for v in nghiem_he]
 \end{lstlisting}
 
+=======
+\subsection{Xử Lý Sai Số Số Thực}
+
+\begin{itemize}
+    \item Dữ liệu đầu vào được chuẩn hóa về \texttt{float}
+    \item Các phép kiểm tra bằng 0 sử dụng ngưỡng \texttt{EPS} (ví dụ: \texttt{abs(x) <= EPS})
+    \item Cách làm này giúp thuật toán chạy nhanh hơn đáng kể so với số hữu tỷ
+\end{itemize}
+
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 \subsection{Phân Biệt Hàm}
 
 \begin{itemize}
@@ -424,19 +556,32 @@ x_float = [float(v) for v in nghiem_he]
 
 \section{Ưu Điểm và Đặc Điểm Của Dự Án}
 
+<<<<<<< HEAD
 \subsection{Độ Chính Xác Cao}
 
 \begin{itemize}
     \item Sử dụng \texttt{Fraction} từ Python để tránh sai số làm tròn
     \item Tất cả phép toán được thực hiện trên số hữu tỷ
     \item Phù hợp cho các bài toán yêu cầu kết quả chính xác
+=======
+\subsection{Hiệu Năng Và Độ Ổn Định}
+
+\begin{itemize}
+    \item Sử dụng \texttt{float} để tăng tốc cho ma trận kích thước lớn
+    \item Dùng ngưỡng \texttt{EPS} để hạn chế nhiễu số học khi so sánh với 0
+    \item Cân bằng tốt giữa tốc độ và độ chính xác thực nghiệm
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
 \end{itemize}
 
 \subsection{Partial Pivoting}
 
 \begin{itemize}
     \item Cách chọn pivot theo giá trị tuyệt đối lớn nhất
+<<<<<<< HEAD
     \item Cải thiện ổn định số (numerical stability)
+=======
+    \item Cải thiện ổn định số 
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
     \item Giảm hiện tượng mất mát độ chính xác trong phép tính
 \end{itemize}
 
@@ -452,7 +597,11 @@ x_float = [float(v) for v in nghiem_he]
 
 \begin{itemize}
     \item Định dạng ma trận đẹp, dễ đọc
+<<<<<<< HEAD
     \item Hiện thị Fraction theo dạng a/b dễ hiểu
+=======
+    \item Hiển thị kết quả số thực gọn và nhất quán
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
     \item Đầu ra có cấu trúc và rõ ràng
 \end{itemize}
 
@@ -489,7 +638,11 @@ Dự án này thành công triển khai các thuật toán cơ bản của đạ
 Tất cả các thuật toán:
 \begin{enumerate}
     \item Được triển khai từ đầu (không dùng thư viện có sẵn để tính)
+<<<<<<< HEAD
     \item Sử dụng \texttt{Fraction} để đảm bảo độ chính xác
+=======
+    \item Sử dụng \texttt{float} kết hợp \texttt{EPS} để đảm bảo ổn định số và hiệu năng
+>>>>>>> 45500fb (sửa fraction thành so sánh với số EPS)
     \item Xử lý đầy đủ các trường hợp đặc biệt
     \item Được kiểm chứng bằng NumPy
 \end{enumerate}

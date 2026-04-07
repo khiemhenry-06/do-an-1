@@ -6,14 +6,14 @@ Tài liệu này giải thích nhanh cách dùng các hàm trong `gaussian.py`, 
 
 Hàm trả về một tuple gồm 3 phần tử:
 
-- phần tử `[0]`: `ma_tran_sau_khu` (ma trận dạng bậc thang, kiểu `Fraction`)
+- phần tử `[0]`: `ma_tran_sau_khu` (ma trận dạng bậc thang, kiểu `float`)
 - phần tử `[1]`: `nghiem_he`
 - phần tử `[2]`: `so_lan_hoan_doi_hang` (`int`)
 
 Dạng tổng quát:
 
 ```python
-ma_trix_sau_khu, nghiem_he, so_lan_doi_hang = gaussian_eliminate(A, b)
+ma_tran_sau_khu, nghiem_he, so_lan_doi_hang = gaussian_eliminate(A, b)
 ```
 
 ## 2) Ý nghĩa của `nghiem_he` (phần tử `[1]`)
@@ -21,7 +21,7 @@ ma_trix_sau_khu, nghiem_he, so_lan_doi_hang = gaussian_eliminate(A, b)
 `nghiem_he` có 3 trường hợp:
 
 - `None`: hệ vô nghiệm
-- `list[Fraction]`: hệ có nghiệm duy nhất
+- `list[float]`: hệ có nghiệm duy nhất
 - `list[str]`: hệ có vô số nghiệm (dạng tham số)
 
 Ví dụ kiểm tra nhanh:
@@ -35,22 +35,19 @@ else:
     print("Nghiệm duy nhất:", nghiem_he)
 ```
 
-## 3) Có cần tự chuyển `Fraction` trước khi gọi hàm không?
+## 3) Cách xử lý sai số số thực
 
-Không cần.
-
-Bạn có thể truyền `int`/`float` bình thường. Hàm sẽ tự đổi sang `Fraction` bên trong để tính toán chính xác.
-
-Chỉ cần đổi sang `float` ở bước cuối nếu bạn muốn:
-
-- in kết quả dạng thập phân
-- đưa vào NumPy/vẽ đồ thị
-
-Ví dụ:
+Dùng `float`, nên khi so sánh với 0 sẽ dùng ngưỡng `EPS`:
 
 ```python
-x_float = [float(v) for v in nghiem_he]
+EPS = 1e-12
+
+if abs(x) <= EPS:
+    # coi như bằng 0
+    ...
 ```
+
+Bạn có thể truyền `int`/`float` bình thường. Hàm sẽ tự chuyển về `float` bên trong.
 
 ## 4) Khác nhau giữa `gaussian_eliminate` và `print_gaussian_eliminate`?
 
@@ -75,6 +72,6 @@ elif len(x) > 0 and isinstance(x[0], str):
     pass
 else:
     # xử lý nghiệm duy nhất
-    # x là list Fraction, dùng tiếp được ngay
+    # x là list float, dùng tiếp được ngay
     pass
 ```
